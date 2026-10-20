@@ -1,0 +1,18 @@
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.491+00:00"},"s":"I",  "c":"CONTROL",  "id":4784927, "ctx":"SignalHandler","msg":"Shutting down the HealthLog"}
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.491+00:00"},"s":"I",  "c":"CONTROL",  "id":4784928, "ctx":"SignalHandler","msg":"Shutting down the TTL monitor"}
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.492+00:00"},"s":"I",  "c":"INDEX",    "id":3684100, "ctx":"SignalHandler","msg":"Shutting down TTL collection monitor thread"}
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.492+00:00"},"s":"I",  "c":"CONNPOOL", "id":22582,   "ctx":"SignalHandler","msg":"Killing all outstanding egress activity","attr":{"instanceName":"NetworkInterfaceTL-TTLMonitorMetadataRefreshNetwork","numKilledByType":{}}}
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.493+00:00"},"s":"I",  "c":"INDEX",    "id":3684101, "ctx":"SignalHandler","msg":"Finished shutting down TTL collection monitor thread"}
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.493+00:00"},"s":"I",  "c":"CONTROL",  "id":4784929, "ctx":"SignalHandler","msg":"Acquiring the global lock for shutdown"}
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.493+00:00"},"s":"I",  "c":"CONTROL",  "id":4784930, "ctx":"SignalHandler","msg":"Shutting down the storage engine"}
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.494+00:00"},"s":"I",  "c":"STORAGE",  "id":22320,   "ctx":"SignalHandler","msg":"Shutting down journal flusher thread"}
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.494+00:00"},"s":"I",  "c":"STORAGE",  "id":22321,   "ctx":"SignalHandler","msg":"Finished shutting down journal flusher thread"}
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.494+00:00"},"s":"I",  "c":"STORAGE",  "id":22322,   "ctx":"SignalHandler","msg":"Shutting down checkpoint thread"}
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.494+00:00"},"s":"I",  "c":"STORAGE",  "id":22323,   "ctx":"SignalHandler","msg":"Finished shutting down checkpoint thread"}
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.495+00:00"},"s":"I",  "c":"STORAGE",  "id":20282,   "ctx":"SignalHandler","msg":"Deregistering all the collections"}
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.495+00:00"},"s":"I",  "c":"STORAGE",  "id":22261,   "ctx":"SignalHandler","msg":"Timestamp monitor shutting down"}
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.497+00:00"},"s":"I",  "c":"STORAGE",  "id":10158003,"ctx":"SignalHandler","msg":"SpillWiredTigerKVEngine shutting down"}
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.497+00:00"},"s":"I",  "c":"STORAGE",  "id":10158006,"ctx":"SignalHandler","msg":"Closing spill WiredTiger","attr":{"closeConfig":"leak_memory=true,"}}
+mongo-1  | {"t":{"$date":"2026-10-16T17:51:36.497+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"SignalHandler","msg":"WiredTiger message","attr":{"message":{"ts_sec":1792173096,"ts_usec":497196,"thread":"28:0x75e5277396c0","session_name":"WT_CONNECTION.close","category":"WT_VERB_RECOVERY_PROGRESS","log_id":1000000,"category_id":35,"verbos
+docker compose -f docker-compose.dev.yml down
+docker compose -f docker-compose.dev.yml up
