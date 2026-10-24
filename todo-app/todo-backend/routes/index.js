@@ -6,6 +6,7 @@ const configs = require("../util/config");
 
 let visits = 0;
 
+// route: http://localhost:8080/api/statistics
 router.get("/statistics", async (req, res) => {
   const count = Number(await redis.get("todoCounter"));
 

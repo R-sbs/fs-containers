@@ -1,0 +1,84 @@
+
+services:
+  nginx:
+    image: nginx:1.29
+    container_name: todo-reverse-proxy
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - todo-network
+    restart: unless-stopped
+
+  frontend:
+    image: todo-dev
+    build:
+      context: ./todo-frontend
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./todo-frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    expose:
+      - "5173"
+    networks:
+      - todo-network
+    restart: unless-stopped
+
+  backend:
+    image: todo-backend:latest
+    build:
+      context: ./todo-backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./todo-backend:/usr/src/app
+      - /usr/src/app/node_modules
+    expose:
+      - "3000"
+    environment:
+      REDIS_URL: redis://redis:6379
+      MONGO_URL: mongodb://root:example@mongo:27017/the_database?authSource=admin
+    depends_on:
+      mongo:
+        condition: service_started
+      redis:
+        condition: service_healthy
+    networks:
+      - todo-network
+    restart: unless-stopped
+
+  mongo:
+    image: initialized-mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: the_database
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - todo-network
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - ./todo-backend/redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - todo-network
+    restart: unless-stopped
+
+networks:
+  todo-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
