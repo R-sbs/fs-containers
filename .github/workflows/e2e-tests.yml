@@ -2,7 +2,7 @@ name: E2E Tests
 
 on:
   push:
-    branches: [ xmain, xmaster ]
+    branches: [ main, master ]
 
 jobs:
   e2e-tests:
@@ -74,7 +74,7 @@ jobs:
           echo "=== Backend logs ==="
           docker compose logs backend
           echo "=== Frontend logs ==="
-          docker compose logs app
+          docker compose logs frontend
           echo "=== Nginx logs ==="
           docker compose logs nginx
 
